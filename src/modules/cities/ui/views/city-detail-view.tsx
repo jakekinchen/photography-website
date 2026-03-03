@@ -52,7 +52,7 @@ export function CityDetailView({ city }: CityDetailViewProps) {
   );
 
   const form = useForm<CityDescriptionForm>({
-    resolver: zodResolver(cityDescriptionSchema),
+    resolver: zodResolver(cityDescriptionSchema as any) as any,
     defaultValues: {
       description: "",
     },

@@ -11,11 +11,21 @@ interface PhotographViewProps {
   id: string;
 }
 
+// Helper to get the correct image URL (handles both S3 and local paths)
+function getImageUrl(url: string): string {
+  if (url.startsWith("/")) {
+    return url; // Local path, use as-is
+  }
+  return keyToUrl(url); // S3 key, convert to full URL
+}
+
 export const PhotographView = ({ id }: PhotographViewProps) => {
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(
     trpc.home.getPhotoById.queryOptions({ id })
   );
+
+  const imageUrl = getImageUrl(data.url);
 
   const imageInfo = {
     width: data.width,
@@ -27,7 +37,7 @@ export const PhotographView = ({ id }: PhotographViewProps) => {
     <div className="h-screen flex justify-center items-center relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <BlurImage
-          src={keyToUrl(data.url)}
+          src={imageUrl}
           alt={data.title || "Photo background"}
           fill
           sizes="100vw"
@@ -38,7 +48,7 @@ export const PhotographView = ({ id }: PhotographViewProps) => {
       </div>
 
       <PhotoPreviewCard
-        url={data.url}
+        url={imageUrl}
         title={data.title}
         imageInfo={imageInfo}
         make={data.make}

@@ -133,26 +133,22 @@ const Mapbox = ({
     const map = mapRef.current;
     const geocoderOptions: GeocoderOptions = {
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN!,
-      mapboxgl: mapboxgl,
+      mapboxgl: mapboxgl as any,
     };
     const geocoder = new MapboxGeocoder(geocoderOptions);
 
-    map.getMap().addControl(geocoder);
+    map.getMap().addControl(geocoder as any);
 
     return () => {
       if (map) {
-        map.getMap().removeControl(geocoder);
+        map.getMap().removeControl(geocoder as any);
       }
     };
   }, [showGeocoder]);
 
   // Handle GeoJSON click
   const onClick = useCallback(
-    (
-      event: mapboxgl.MapMouseEvent & {
-        features?: mapboxgl.GeoJSONFeature[];
-      }
-    ) => {
+    (event: any) => {
       const feature = event.features?.[0];
       if (feature && onGeoJsonClick) {
         onGeoJsonClick(feature as GeoJSON.Feature);
@@ -189,7 +185,7 @@ const Mapbox = ({
       style={{ width: "100%", height: "100%" }}
       mapStyle={MAP_STYLES[theme === "dark" ? "dark" : "light"]}
       interactiveLayerIds={geoJsonData ? ["data"] : undefined}
-      onClick={onClick}
+      onClick={onClick as any}
       onMove={(evt) => {
         if (onMove) {
           onMove({

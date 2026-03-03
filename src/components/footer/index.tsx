@@ -8,57 +8,47 @@ const Footer = () => {
         {/* AVATAR  */}
         <Avatar className="size-[60px]">
           <AvatarImage src="/avatar.jpg" alt="avatar" sizes="60px" />
-          <AvatarFallback>EC</AvatarFallback>
+          <AvatarFallback>JK</AvatarFallback>
         </Avatar>
 
         {/* NAME  */}
         <div className="flex flex-col items-center lg:items-start gap-[2px]">
-          <h1 className="text-2xl">ECarry</h1>
+          <h1 className="text-2xl">Jake Kinchen</h1>
           <p className="text-sm opacity-60">Photographer</p>
         </div>
       </div>
-      <div className="grid lg:w-full grid-cols-1 lg:grid-cols-3 gap-7 lg:gap-14">
+      <div className="grid lg:w-full grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-14">
         <FooterNav
           title="Pages"
           links={[
             { title: "Home", href: "/" },
-            { title: "Travel", href: "/travel" },
-            { title: "Discover", href: "/discover" },
-            { title: "Blog", href: "/blog" },
             { title: "About", href: "/about" },
           ]}
         />
         <FooterNav
-          title="CMS"
-          links={[{ title: "Dashboard", href: "/dashboard" }]}
-        />
-        <FooterNav
-          title="Utility"
-          links={[{ title: "Screensaver", href: "/screensaver" }]}
+          title="Categories"
+          links={[
+            { title: "Portraits", href: "/gallery/portraits" },
+            { title: "Landscapes", href: "/gallery/landscapes" },
+            { title: "Events", href: "/gallery/events" },
+            { title: "Real Estate", href: "/gallery/real-estate" },
+          ]}
         />
       </div>
 
       {/* Attribution */}
       <div className="text-xs md:text-sm text-center md:text-left">
         <p>
-          <span className="opacity-60">© Design by </span>
+          <span className="opacity-60">© {new Date().getFullYear()} </span>
           <a
-            href="https://templates.gola.io/template/hanssen"
+            href="https://jakekinchen.com"
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2"
           >
-            Pawel Gola
+            Jake Kinchen
           </a>
-          <span className="opacity-60">. Powered by </span>
-          <a
-            href="https://github.com/ecarry"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-2"
-          >
-            ECarry
-          </a>
+          <span className="opacity-60">. All rights reserved.</span>
         </p>
       </div>
     </div>

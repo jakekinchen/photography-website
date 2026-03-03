@@ -6,7 +6,6 @@ import Carousel from "@/components/photo-carousel";
 import BlurImage from "@/components/blur-image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/empty-state";
-import { keyToUrl } from "@/modules/s3/lib/key-to-url";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ export const SliderView = () => {
       <EmptyState
         icon={<ImageOff className="h-12 w-12" />}
         title="No photos yet"
-        description="Upload some photos and like your favorites to get started"
+        description="Add photos to the public/jakekinchen-photos folder to get started"
         action={
           <Button asChild>
             <Link href="/dashboard/photos">Go to Dashboard</Link>
@@ -45,7 +44,7 @@ export const SliderView = () => {
         return (
           <div key={photo.id} className="flex-[0_0_100%] h-full relative">
             <BlurImage
-              src={keyToUrl(photo.url)}
+              src={photo.url}
               alt={photo.title}
               fill
               sizes="75vw"

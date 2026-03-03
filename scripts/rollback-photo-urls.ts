@@ -18,6 +18,11 @@ if (!process.env.DATABASE_URL) {
   console.log("📝 Example: DATABASE_URL=postgresql://user:password@host:port/database");
   process.exit(1);
 }
+if (!db) {
+  console.error("❌ Database client is not available");
+  process.exit(1);
+}
+const database = db;
 
 const BACKUP_FILE = join(process.cwd(), "scripts", "photo-urls-backup.json");
 
@@ -61,7 +66,7 @@ async function rollbackPhotoUrls() {
     // Restore URLs using a batch update for better performance
     let restored = 0;
     for (const photo of backup) {
-      const result = await db.execute(
+      const result = await database.execute(
         sql`
           UPDATE photos 
           SET url = ${photo.originalUrl},
@@ -77,7 +82,7 @@ async function rollbackPhotoUrls() {
     console.log(`✅ Successfully restored ${restored} photo URLs`);
 
     // Verify restoration
-    const restoredPhotos = await db
+    const restoredPhotos = await database
       .select({
         id: photos.id,
         url: photos.url,

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: data.title,
-    description: data.description,
+    description: `${data.title} photography by Jake Kinchen.`,
   };
 }
 

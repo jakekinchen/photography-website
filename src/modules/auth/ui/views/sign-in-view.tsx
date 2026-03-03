@@ -33,7 +33,7 @@ export const SignInView = () => {
   const [pending, setPending] = useState(false);
 
   const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signInSchema as any) as any,
     defaultValues: {
       email: "",
       password: "",

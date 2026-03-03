@@ -1,5 +1,6 @@
 // External dependencies
 import { type Metadata } from "next";
+import Image from "next/image";
 
 // Internal dependencies - UI Components
 import Footer from "@/components/footer";
@@ -20,7 +21,56 @@ const AboutPage = () => {
     <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row w-full">
       {/* LEFT CONTENT - Fixed */}
       <div className="w-full h-[70vh] lg:w-1/2 lg:fixed lg:top-0 lg:left-0 lg:h-screen p-0 lg:p-3">
-        <div className="w-full h-full relative bg-[url(/bg.jpg)] bg-top bg-cover rounded-xl">
+        <div className="w-full h-full relative rounded-xl overflow-hidden">
+          <div className="grid grid-cols-2 grid-rows-7 gap-2 h-full w-full bg-muted p-2">
+            <div className="relative col-span-1 row-span-3 overflow-hidden rounded-lg">
+              <Image
+                src="/about/about-1.jpg"
+                alt="About gallery image 1"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative col-span-1 row-span-2 overflow-hidden rounded-lg">
+              <Image
+                src="/about/about-2.jpg"
+                alt="About gallery image 2"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative col-span-1 row-span-3 overflow-hidden rounded-lg">
+              <Image
+                src="/about/about-3.jpg"
+                alt="About gallery image 3"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative col-span-1 row-span-4 overflow-hidden rounded-lg">
+              <Image
+                src="/about/about-4.jpg"
+                alt="About gallery image 4"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative col-span-2 row-span-1 overflow-hidden rounded-lg">
+              <Image
+                src="/about/about-5.jpg"
+                alt="About gallery image 5"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+
           <div className="absolute right-0 bottom-0">
             <VectorCombined title="About" position="bottom-right" />
           </div>

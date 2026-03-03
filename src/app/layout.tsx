@@ -17,10 +17,10 @@ const readexPro = Readex_Pro({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - ECarry Photography",
-    default: "ECarry Photography",
+    template: "%s - Jake Kinchen Photography",
+    default: "Jake Kinchen Photography",
   },
-  description: "ECarry Photography",
+  description: "Professional photography by Jake Kinchen - portraits, events, real estate, and landscapes",
 };
 
 export default function RootLayout({

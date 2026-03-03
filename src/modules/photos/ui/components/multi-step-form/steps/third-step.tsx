@@ -68,7 +68,7 @@ export function ThirdStep({
 
   const form = useForm({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(thirdStepSchema) as any,
+    resolver: zodResolver(thirdStepSchema as any) as any,
     defaultValues: {
       latitude: initialData?.latitude ?? 0,
       longitude: initialData?.longitude ?? 0,

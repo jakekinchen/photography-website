@@ -7,18 +7,10 @@ const AboutCard = () => {
         <h1 className="text-3xl">About</h1>
         <div className="flex flex-col gap-4 font-light">
           <p>
-            With a focus on both candid moments and stunning landscapes, I
-            strive to evoke emotion and tell stories through my work. My
-            photography blends the rawness of everyday life with the artistry of
-            fine art, allowing viewers to connect with each image on a deeper
-            level.
+            Hey everyone! I&apos;ve been taking professional photos for the past 10 years of my life since I was in high school. Feel free to reach out to me here or on my instagram here to inquire about booking a photography session. I do everything from portraits, to events, to real estate, and even videography work. You can either use the form below, DM me on insta, or reach out directly to my email jakekinchen@gmail.com.
           </p>
-
           <p>
-            Whether I&apos;m exploring urban environments or venturing into
-            nature, my goal is to highlight the extraordinary in the ordinary.
-            Through my lens, I invite you to join me on this visual journey of
-            discovery and inspiration.
+            Gear: Canon R8, Canon VCM 24mm f/1.4, Samyang 85mm f/1.4.
           </p>
         </div>
       </div>

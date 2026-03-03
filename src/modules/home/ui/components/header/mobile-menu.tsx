@@ -14,9 +14,10 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { label: "Home", href: "/" },
-  { label: "Travel", href: "/travel" },
-  { label: "Discover", href: "/discover" },
-  { label: "Blog", href: "/blog" },
+  { label: "Portraits", href: "/gallery/portraits" },
+  { label: "Landscapes", href: "/gallery/landscapes" },
+  { label: "Events", href: "/gallery/events" },
+  { label: "Real Estate", href: "/gallery/real-estate" },
   { label: "About", href: "/about" },
 ];
 
@@ -72,15 +73,15 @@ export default function MobileMenu({ isOpen, onClose }: Props) {
                 {/* AVATAR  */}
                 <Avatar className="size-[60px]">
                   <AvatarImage
-                    src="https://avatars.githubusercontent.com/u/16572906?s=400&u=a304af70d12572524d540553425d78ff4d1a101a&v=4"
+                    src="/avatar.jpg"
                     alt="Avatar"
                   />
-                  <AvatarFallback>EC</AvatarFallback>
+                  <AvatarFallback>JK</AvatarFallback>
                 </Avatar>
 
                 {/* NAME  */}
                 <div className="flex flex-col">
-                  <h1 className="text-lg">ECarry</h1>
+                  <h1 className="text-lg">Jake Kinchen</h1>
                   <p className="text-sm text-text-muted">Photographer</p>
                 </div>
               </div>

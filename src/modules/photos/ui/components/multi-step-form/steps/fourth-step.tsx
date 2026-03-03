@@ -14,7 +14,7 @@ export function FourthStep({
 }: StepProps) {
   const form = useForm({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(fourthStepSchema) as any,
+    resolver: zodResolver(fourthStepSchema as any) as any,
     defaultValues: initialData,
     mode: "onChange",
   });

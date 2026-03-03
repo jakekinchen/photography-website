@@ -28,7 +28,7 @@ export function SecondStep({
 }: MetadataStepProps) {
   const form = useForm<SecondStepData>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(secondStepSchema) as any,
+    resolver: zodResolver(secondStepSchema as any) as any,
     defaultValues: {
       title: initialData?.title || "",
       description: initialData?.description || "",

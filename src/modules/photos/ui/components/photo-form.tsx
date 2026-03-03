@@ -96,7 +96,7 @@ export function PhotoForm({
   );
 
   const form = useForm<z.infer<typeof photosInsertSchema>>({
-    resolver: zodResolver(photosInsertSchema),
+    resolver: zodResolver(photosInsertSchema as any) as any,
     defaultValues: {
       title: "",
       description: "",

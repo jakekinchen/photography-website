@@ -1,9 +1,11 @@
 import z from "zod";
-import { db } from "@/db";
 import { createTRPCRouter, baseProcedure } from "@/trpc/init";
-import { desc, eq, and } from "drizzle-orm";
-import { citySets, photos } from "@/db/schema";
 import { TRPCError } from "@trpc/server";
+import {
+  getFeaturedPhotos,
+  getCategorySets,
+  getPhotoById as getStaticPhotoById,
+} from "@/lib/static-photos";
 
 export const homeRouter = createTRPCRouter({
   getManyLikePhotos: baseProcedure
@@ -14,17 +16,8 @@ export const homeRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const { limit } = input;
-
-      const data = await db
-        .select()
-        .from(photos)
-        .where(
-          and(eq(photos.isFavorite, true), eq(photos.visibility, "public"))
-        )
-        .orderBy(desc(photos.updatedAt))
-        .limit(limit);
-
-      return data;
+      const photos = getFeaturedPhotos(limit);
+      return photos;
     }),
   getCitySets: baseProcedure
     .input(
@@ -34,38 +27,26 @@ export const homeRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const { limit } = input;
-
-      const data = await db.query.citySets.findMany({
-        with: {
-          coverPhoto: true,
-          photos: true,
-        },
-        orderBy: [desc(citySets.updatedAt)],
-        limit: limit,
-      });
-
-      return data;
+      const categories = getCategorySets();
+      return categories.slice(0, limit);
     }),
   getPhotoById: baseProcedure
     .input(
       z.object({
-        id: z.uuid(),
+        id: z.string(),
       })
     )
     .query(async ({ input }) => {
       const { id } = input;
+      const photo = getStaticPhotoById(id);
 
-      const data = await db.query.photos.findFirst({
-        where: and(eq(photos.id, id), eq(photos.visibility, "public")),
-      });
-
-      if (!data) {
+      if (!photo) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Photo not found",
         });
       }
 
-      return data;
+      return photo;
     }),
 });

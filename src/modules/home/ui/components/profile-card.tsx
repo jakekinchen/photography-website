@@ -18,21 +18,21 @@ const ProfileCard = () => {
             {/* AVATAR  */}
             <Avatar className="size-[60px]">
               <AvatarImage src="/avatar.jpg" alt="Avatar" />
-              <AvatarFallback>EC</AvatarFallback>
+              <AvatarFallback>JK</AvatarFallback>
             </Avatar>
 
             {/* NAME  */}
             <div className="flex flex-col gap-[2px]">
-              <h1 className="text-lg">ECarry</h1>
+              <h1 className="text-lg">Jake Kinchen</h1>
               <p className="text-sm text-text-muted">Photographer</p>
             </div>
           </div>
 
           <div className="lg:mt-4 xl:mt-0">
             <p className="text-text-muted text-[15px]">
-              I&apos;m ECarry, a photographer dedicated to capturing authentic
-              moments and telling stories through creative and emotional
-              imagery, wherever my journey takes me.
+              I&apos;m Jake, a photographer with 10 years of experience
+              specializing in portraits, events, real estate, and videography.
+              Let&apos;s capture your story.
             </p>
           </div>
 
@@ -45,19 +45,12 @@ const ProfileCard = () => {
       <div className="col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 flex flex-col justify-between gap-3">
         <ContactCard
           title="Instagram"
-          href="https://instagram.com/ekkooooooooooo0o0"
-        />
-
-        <ContactCard title="GitHub" href="https://github.com/ecarry" />
-
-        <ContactCard
-          title="Xiaohongshu"
-          href="https://www.xiaohongshu.com/user/profile/66c84ba2000000001b01b3f1"
+          href="https://instagram.com/jakekinchen"
         />
 
         <ContactCard
           title="Contact me"
-          href="mailto:lianshiliang93@gmail.com"
+          href="mailto:jakekinchen@gmail.com"
           className="bg-primary text-white dark:text-black hover:bg-primary"
         />
       </div>

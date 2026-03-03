@@ -6,6 +6,10 @@ import { photos } from "@/db/schema";
 
 export const discoverRouter = createTRPCRouter({
   getManyPhotos: baseProcedure.input(z.object({})).query(async () => {
+    if (!db) {
+      return [];
+    }
+
     const data = await db
       .select({
         id: photos.id,

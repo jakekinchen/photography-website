@@ -20,6 +20,12 @@ if (!process.env.DATABASE_URL) {
   process.exit(1);
 }
 
+if (!db) {
+  console.error("❌ Database client is not available");
+  process.exit(1);
+}
+const database = db;
+
 const DOMAIN_TO_REMOVE = "https://photograph.ecarry.uk/";
 const BACKUP_FILE = join(process.cwd(), "scripts", "photo-urls-backup.json");
 
@@ -33,7 +39,7 @@ interface PhotoBackup {
 async function createBackup(): Promise<PhotoBackup[]> {
   console.log("💾 Creating backup of current photo URLs...");
   
-  const photosWithDomain = await db
+  const photosWithDomain = await database
     .select({
       id: photos.id,
       url: photos.url,
@@ -86,7 +92,7 @@ async function cleanPhotoUrls() {
 
     // Perform the update
     console.log("🔄 Updating photo URLs...");
-    const result = await db.execute(
+    const result = await database.execute(
       sql`
         UPDATE photos 
         SET url = REPLACE(url, ${DOMAIN_TO_REMOVE}, ''),
@@ -98,7 +104,7 @@ async function cleanPhotoUrls() {
     console.log(`✅ Successfully updated ${result.rowCount} photo URLs`);
 
     // Verify the changes
-    const remainingPhotos = await db
+    const remainingPhotos = await database
       .select({
         id: photos.id,
         url: photos.url,
@@ -142,7 +148,7 @@ async function rollbackPhotoUrls() {
     // Restore URLs one by one for safety
     let restored = 0;
     for (const photo of backup) {
-      await db.execute(
+      await database.execute(
         sql`
           UPDATE photos 
           SET url = ${photo.originalUrl},

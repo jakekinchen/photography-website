@@ -1,7 +1,7 @@
 "use client";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import CityCard from "../components/city-card";
+import CategoryCard from "../components/category-card";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,10 +16,11 @@ export const CitiesView = () => {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3">
       {data.map((item) => (
-        <CityCard
+        <CategoryCard
           key={item.id}
-          title={item.city}
+          title={item.category}
           coverPhoto={item.coverPhoto}
+          slug={item.id}
         />
       ))}
     </div>

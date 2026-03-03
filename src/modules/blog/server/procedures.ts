@@ -7,6 +7,10 @@ import { TRPCError } from "@trpc/server";
 
 export const blogRouter = createTRPCRouter({
   getMany: baseProcedure.query(async () => {
+    if (!db) {
+      return [];
+    }
+
     const data = await db
       .select()
       .from(posts)
@@ -23,6 +27,10 @@ export const blogRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
+      if (!db) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
       const [data] = await db
         .select()
         .from(posts)
