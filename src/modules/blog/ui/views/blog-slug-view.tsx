@@ -10,9 +10,22 @@ import Footer from "@/components/footer";
 import { keyToUrl } from "@/modules/s3/lib/key-to-url";
 import RichTextViewer from "@/components/editor/rich-text-viewer";
 
+const formatPublishedDate = (value?: string | Date | null) => {
+  if (!value) return "Recently published";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Recently published";
+
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export const BlogSlugView = ({ slug }: { slug: string }) => {
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(trpc.blog.getOne.queryOptions({ slug }));
+  const publishedDate = formatPublishedDate(data.createdAt);
 
   return (
     <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row w-full">
@@ -21,9 +34,10 @@ export const BlogSlugView = ({ slug }: { slug: string }) => {
         <div className="block w-full h-full relative rounded-xl overflow-hidden">
           <Image
             src={keyToUrl(data.coverImage) || "/placeholder.svg"}
-            alt="Image"
+            alt={data.title}
             fill
             quality={75}
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />
 
@@ -42,7 +56,7 @@ export const BlogSlugView = ({ slug }: { slug: string }) => {
         <div className="bg-muted rounded-xl p-10 md:p-12 md:h-[calc(100vh-24px)] flex flex-col">
           <div className="mb-10">
             <span className="bg-muted-hover rounded-sm py-1 px-2 text-xs text-text-muted font-light">
-              March 2024
+              {publishedDate}
             </span>
           </div>
 
@@ -51,10 +65,13 @@ export const BlogSlugView = ({ slug }: { slug: string }) => {
             <h2 className="font-light">{data.description}</h2>
 
             <div className="mt-8">
-              <button className="bg-background hover:bg-muted duration-150 transition-all flex items-center gap-1 py-[10px] pr-3 pl-[14px] rounded-lg">
+              <a
+                href="#article"
+                className="bg-background hover:bg-muted duration-150 transition-all inline-flex items-center gap-1 py-[10px] pr-3 pl-[14px] rounded-lg"
+              >
                 <span className="text-sm font-light">Read Article</span>{" "}
                 <ArrowDownIcon size={14} />
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -72,12 +89,14 @@ export const BlogSlugView = ({ slug }: { slug: string }) => {
 
           <div className="bg-muted rounded-xl p-5 w-full flex justify-between">
             <p className="text-text-muted">Date</p>
-            <p>March 2024</p>
+            <p>{publishedDate}</p>
           </div>
         </div>
 
         {/* POST PREVIEW */}
-        <RichTextViewer content={data.content || ""} />
+        <div id="article">
+          <RichTextViewer content={data.content || ""} />
+        </div>
 
         {/* CONTACT CARD  */}
         <ContactCard

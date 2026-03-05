@@ -1,4 +1,17 @@
-import type { auth } from "./auth";
+export type Session = {
+  session: {
+    id: string;
+    expiresAt: Date;
+    token: string;
+    userAgent: string | null;
+    createdAt: Date;
+  };
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    image?: string | null;
+  };
+};
 
-export type Session = typeof auth.$Infer.Session;
-export type User = typeof auth.$Infer.Session.user;
+export type User = Session["user"];

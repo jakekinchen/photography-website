@@ -1,4 +1,8 @@
-import { auth } from "@/modules/auth/lib/auth";
-import { toNextJsHandler } from "better-auth/next-js";
+import { NextResponse } from "next/server";
 
-export const { GET, POST } = toNextJsHandler(auth.handler);
+function disabledAuthResponse() {
+  return NextResponse.json({ error: "Authentication is disabled." }, { status: 404 });
+}
+
+export const GET = disabledAuthResponse;
+export const POST = disabledAuthResponse;

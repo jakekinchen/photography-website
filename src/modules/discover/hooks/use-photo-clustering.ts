@@ -46,7 +46,7 @@ export function usePhotoClustering({
     return result;
 
 
-  }, [clusterIndex, zoom, bounds, validPhotos.length]);
+  }, [clusterIndex, zoom, bounds]);
 
   // Handle map move/zoom changes
   const handleMove = useCallback(
