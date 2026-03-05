@@ -59,13 +59,6 @@ export const photosRouter = createTRPCRouter({
               },
             });
 
-          const updatedCitySet = await db
-            .select()
-            .from(citySets)
-            .where(
-              sql`${citySets.country} = ${insertedPhoto.country} AND ${citySets.city} = ${insertedPhoto.city}`
-            );
-        } else {
         }
 
         return insertedPhoto;

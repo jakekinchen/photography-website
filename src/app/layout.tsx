@@ -10,11 +10,34 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://example.com"),
   title: {
     template: "%s - Jake Kinchen Photography",
     default: "Jake Kinchen Photography",
   },
   description: "Professional photography by Jake Kinchen - portraits, events, real estate, and landscapes",
+  openGraph: {
+    title: "Jake Kinchen Photography",
+    description:
+      "Professional photography by Jake Kinchen - portraits, events, real estate, and landscapes",
+    type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/avatar.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jake Kinchen Photography",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jake Kinchen Photography",
+    description:
+      "Professional photography by Jake Kinchen - portraits, events, real estate, and landscapes",
+    images: ["/avatar.jpg"],
+  },
 };
 
 export default function RootLayout({

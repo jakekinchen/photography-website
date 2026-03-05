@@ -1,15 +1,9 @@
-import { cache } from "react";
-import { auth } from "./auth";
-import { headers } from "next/headers";
+import type { Session } from "./auth-types";
 
-export const getSession = cache(async () => {
-  return await auth.api.getSession({
-    headers: await headers(),
-  });
-});
+export async function getSession(): Promise<Session | null> {
+  return null;
+}
 
-export const getActiveSessions = cache(async () => {
-  return await auth.api.listSessions({
-    headers: await headers(),
-  });
-});
+export async function getSessions(): Promise<Session["session"][]> {
+  return [];
+}
