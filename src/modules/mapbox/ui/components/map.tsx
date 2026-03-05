@@ -7,6 +7,7 @@ import Map, {
   GeolocateControl,
   Layer,
   LayerProps,
+  MapLayerMouseEvent,
   MapRef,
   Marker,
   NavigationControl,
@@ -133,22 +134,22 @@ const Mapbox = ({
     const map = mapRef.current;
     const geocoderOptions: GeocoderOptions = {
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN!,
-      mapboxgl: mapboxgl as any,
+      mapboxgl: mapboxgl as unknown as GeocoderOptions["mapboxgl"],
     };
     const geocoder = new MapboxGeocoder(geocoderOptions);
 
-    map.getMap().addControl(geocoder as any);
+    map.getMap().addControl(geocoder as unknown as mapboxgl.IControl);
 
     return () => {
       if (map) {
-        map.getMap().removeControl(geocoder as any);
+        map.getMap().removeControl(geocoder as unknown as mapboxgl.IControl);
       }
     };
   }, [showGeocoder]);
 
   // Handle GeoJSON click
   const onClick = useCallback(
-    (event: any) => {
+    (event: MapLayerMouseEvent) => {
       const feature = event.features?.[0];
       if (feature && onGeoJsonClick) {
         onGeoJsonClick(feature as GeoJSON.Feature);
@@ -185,7 +186,7 @@ const Mapbox = ({
       style={{ width: "100%", height: "100%" }}
       mapStyle={MAP_STYLES[theme === "dark" ? "dark" : "light"]}
       interactiveLayerIds={geoJsonData ? ["data"] : undefined}
-      onClick={onClick as any}
+      onClick={onClick}
       onMove={(evt) => {
         if (onMove) {
           onMove({

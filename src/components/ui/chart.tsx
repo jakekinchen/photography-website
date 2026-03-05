@@ -217,7 +217,7 @@ function ChartTooltipContent({
                             {
                               "--color-bg": indicatorColor,
                               "--color-border": indicatorColor,
-                            } as any
+                            } as React.CSSProperties
                           }
                         />
                       )

@@ -27,7 +27,7 @@ export function FirstStep({
   const [isCopied, setIsCopied] = useState(false);
 
   const form = useForm<FirstStepData>({
-    resolver: zodResolver(firstStepSchema as any) as any,
+    resolver: zodResolver(firstStepSchema),
     defaultValues: {
       url: initialData?.url || "",
     },
