@@ -80,7 +80,7 @@ export const PhotoIdView = ({ id }: PhotoIdViewProps) => {
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema as any) as any,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       id: data.id,
       title: data.title ?? "",

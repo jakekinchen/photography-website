@@ -88,7 +88,7 @@ export const PostForm = ({ post }: PostFormProps) => {
   );
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema as any) as any,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       title: post?.title || "",
       slug: post?.slug || "",
