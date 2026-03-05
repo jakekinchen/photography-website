@@ -7,7 +7,7 @@ import Map, {
   GeolocateControl,
   Layer,
   LayerProps,
-  MapLayerMouseEvent,
+  MapMouseEvent,
   MapRef,
   Marker,
   NavigationControl,
@@ -149,7 +149,7 @@ const Mapbox = ({
 
   // Handle GeoJSON click
   const onClick = useCallback(
-    (event: MapLayerMouseEvent) => {
+    (event: MapMouseEvent) => {
       const feature = event.features?.[0];
       if (feature && onGeoJsonClick) {
         onGeoJsonClick(feature as GeoJSON.Feature);

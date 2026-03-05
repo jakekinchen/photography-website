@@ -9,12 +9,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
-import { Readex_Pro } from "next/font/google";
-
-const readexPro = Readex_Pro({
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: {
     template: "%s - Jake Kinchen Photography",
@@ -30,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${readexPro.className} antialiased`}>
+      <body className="antialiased">
         <NuqsAdapter>
           <TRPCReactProvider>
             <ThemeProvider attribute="class">
