@@ -175,21 +175,45 @@ export function getAllPhotos(): StaticPhoto[] {
   return categories.flatMap((category) => getPhotosFromCategory(category));
 }
 
-// Get featured photos (random selection from each category)
-export function getFeaturedPhotos(limit: number = 10): StaticPhoto[] {
-  const categories = getCategories();
-  const featured: StaticPhoto[] = [];
+const LANDING_FEATURED_CATEGORIES = ["events", "portraits"];
 
-  for (const category of categories) {
-    const photos = getPhotosFromCategory(category);
-    if (photos.length > 0) {
-      // Pick a few random photos from each category
-      const shuffled = photos.sort(() => Math.random() - 0.5);
-      featured.push(...shuffled.slice(0, Math.ceil(limit / categories.length)));
+function interleavePhotos(photoGroups: StaticPhoto[][]): StaticPhoto[] {
+  const maxLength = Math.max(...photoGroups.map((group) => group.length), 0);
+  const result: StaticPhoto[] = [];
+
+  for (let index = 0; index < maxLength; index++) {
+    for (const group of photoGroups) {
+      const photo = group[index];
+      if (photo) {
+        result.push(photo);
+      }
     }
   }
 
-  return featured.slice(0, limit);
+  return result;
+}
+
+// Get featured photos for landing carousel
+export function getFeaturedPhotos(limit: number = 10): StaticPhoto[] {
+  const prioritizedGroups = LANDING_FEATURED_CATEGORIES.map((category) =>
+    getPhotosFromCategory(category).slice(0, limit)
+  ).filter((group) => group.length > 0);
+
+  const prioritized = interleavePhotos(prioritizedGroups);
+
+  if (prioritized.length >= limit) {
+    return prioritized.slice(0, limit);
+  }
+
+  const remainingCategories = getCategories().filter(
+    (category) => !LANDING_FEATURED_CATEGORIES.includes(category)
+  );
+
+  const remainder = remainingCategories.flatMap((category) =>
+    getPhotosFromCategory(category)
+  );
+
+  return [...prioritized, ...remainder].slice(0, limit);
 }
 
 // Get category sets (similar to city sets but by category)
